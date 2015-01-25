@@ -66,7 +66,7 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('SignInCtrl', function($scope, $state, $http, $rootScope, $ionicLoading, $timeout) {
-	    
+    checkConnection();
     //$rootScope.getServerIp='http://10.11.201.19/';
     $rootScope.getServerIp='http://202.40.190.14:8084/'
     
@@ -1253,16 +1253,7 @@ angular.module('starter', ['ionic'])
 })
 
 .run(function($ionicPlatform, $ionicPopup) {
-    $ionicPlatform.ready(function() {
-        if(window.Connection) {
-            if(navigator.connection.type == Connection.NONE) {
-                $ionicPopup.alert({
-                    title: 'Network Status',
-                    content: 'No Internet Connection'
-                })
-                ionic.Platform.exitApp();                                        
-            }
-        } else {
+    $ionicPlatform.ready(function() {        
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -1274,6 +1265,18 @@ angular.module('starter', ['ionic'])
         $ionicPlatform.registerBackButtonAction(function (event) {
         event.preventDefault();
         }, 100)
+});
+    
+});
+
+function checkConnection() {
+    if(window.Connection) {
+            if(navigator.connection.type == Connection.NONE) {
+                $ionicPopup.alert({
+                    title: 'Network Status',
+                    content: 'No Internet Connection'
+                })
+                ionic.Platform.exitApp();                                        
+            }
     }
-});
-});
+}
