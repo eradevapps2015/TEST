@@ -33,7 +33,7 @@ angular.module('starter', ['ionic'])
 	      			event.preventDefault();
 	 		}, 100)
                 }
-  });
+  })
 
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
