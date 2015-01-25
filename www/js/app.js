@@ -1254,11 +1254,14 @@ angular.module('starter', ['ionic'])
 
 
 			
-.run(function($ionicPlatform,$ionicPopup) {
-  $ionicPlatform.ready(function() {
+.run(function($ionicPlatform, $ionicPopup) {
+	if(checkConnection() == "No network connection") {
+		$ionicPopup.alert("No network connection");		
+	} else {
+	$ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-      checkConnection();
+      
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -1280,25 +1283,10 @@ angular.module('starter', ['ionic'])
 //        }
 //    }
     
-    function checkConnection() {
-        var networkState = navigator.connection.type;
-
-        var states = {};
-        states[Connection.UNKNOWN]  = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI]     = 'WiFi connection';
-        states[Connection.CELL_2G]  = 'Cell 2G connection';
-        states[Connection.CELL_3G]  = 'Cell 3G connection';
-        states[Connection.CELL_4G]  = 'Cell 4G connection';
-        states[Connection.CELL]     = 'Cell generic connection';
-        states[Connection.NONE]     = 'No network connection';
-
-        alert('Connection type: ' + states[networkState]);
-    }
-
     
-      
-  });
+  });	
+	}
+  
 //    document.addEventListener("deviceready", onDeviceReady, false);
 //
 //    function onDeviceReady() {
@@ -1315,4 +1303,21 @@ angular.module('starter', ['ionic'])
 //	}
 //        //document.getElementById("accBalanceLnk").addEventListener("click", accountBalance, false);
 //     }
+
+   function checkConnection() {
+        var networkState = navigator.connection.type;
+
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+
+        //alert('Connection type: ' + states[networkState]);
+        return states[networkState];
+    }
 })
