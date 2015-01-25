@@ -1255,69 +1255,35 @@ angular.module('starter', ['ionic'])
 
 			
 .run(function($ionicPlatform, $ionicPopup) {
-	if(checkConnection() == "No network connection") {
-		$ionicPopup.alert("No network connection");		
-	} else {
 	$ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-      
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+		if(window.Connection) {
+                if(navigator.connection.type == Connection.NONE) {
+                    $ionicPopup.confirm({
+                        title: "Internet Disconnected",
+                        content: "The internet is disconnected on your device."
+                    })
+                    .then(function(result) {
+                        if(!result) {
+                            ionic.Platform.exitApp();
+                        }
+                    });
+                }
+            } else {
+            	// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    		// for form inputs)
+            	if(window.cordova && window.cordova.plugins.Keyboard) {
+      			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    		}
+    		if(window.StatusBar) {
+      			StatusBar.styleDefault();
+    		}
 	
-	$ionicPlatform.registerBackButtonAction(function (event) {
-      event.preventDefault();
- }, 100) 
- 
-//	if(window.Connection) {
-//        if(navigator.connection.type == Connection.NONE) {
-//            $ionicPopup.confirm({
-//                title: "Internet Disconnected",
-//                content: "The internet is disconnected on your device."
-//            })
-//
-//        }
-//    }
+		$ionicPlatform.registerBackButtonAction(function (event) {
+      			event.preventDefault();
+ 		}, 100)
+            }
     
     
-  });	
-	}
-  
-//    document.addEventListener("deviceready", onDeviceReady, false);
-//
-//    function onDeviceReady() {
-//
-//        //Initialize anything you need to. aka: Google analytics.
-//
-//        //Set other evens you need to listen to.
-////        document.addEventListener("online", onOnline, false);
-////        document.addEventListener("offline", onOffline, false);
-//         documrnt.addEventListener("load", initAccBalance, false);
-//    
-//	function initAccBalance() {
-//		document.getElementById("btnLogin").addEventListener("click", accountBalance);
-//	}
-//        //document.getElementById("accBalanceLnk").addEventListener("click", accountBalance, false);
-//     }
+  });
 
-   function checkConnection() {
-        var networkState = navigator.connection.type;
-
-        var states = {};
-        states[Connection.UNKNOWN]  = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI]     = 'WiFi connection';
-        states[Connection.CELL_2G]  = 'Cell 2G connection';
-        states[Connection.CELL_3G]  = 'Cell 3G connection';
-        states[Connection.CELL_4G]  = 'Cell 4G connection';
-        states[Connection.CELL]     = 'Cell generic connection';
-        states[Connection.NONE]     = 'No network connection';
-
-        //alert('Connection type: ' + states[networkState]);
-        return states[networkState];
-    }
 })
