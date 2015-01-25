@@ -1254,10 +1254,11 @@ angular.module('starter', ['ionic'])
 
 
 			
-.run(function($ionicPlatform,$ionicPopup) {
+.run(function($ionicPlatform, $ionicPopup) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    checkConnection();
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -1269,16 +1270,21 @@ angular.module('starter', ['ionic'])
       event.preventDefault();
  }, 100) 
  
-	if(window.Connection) {
-                if(navigator.connection.type == Connection.NONE) {
-                    $ionicPopup.confirm({
-                        title: "Internet Disconnected",
-                        content: "The internet is disconnected on your device."
-                    })
-                    
-                }
-            }
-  });
+	function checkConnection() {
+        var networkState = navigator.connection.type;
+
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+
+        alert('Connection type: ' + states[networkState]);
+    }
 //    document.addEventListener("deviceready", onDeviceReady, false);
 //
 //    function onDeviceReady() {
