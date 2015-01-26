@@ -38,6 +38,8 @@
        
        .div-custom {
            padding: 2px;
+           width: 80%;
+           margin-left: 10%;
        }
         
         .icon-btn-custom {
@@ -111,14 +113,12 @@
                     <input type="password" placeholder="Password" ng-model="user.pass">
                 </label>            
             </div>
-            <div class="row">
-                <div class="col-10"></div>
-                <div class="col-80 item item-input-inset div-custom" style="border: none;">                    
+            <div class="row">                
+                <div class="div-custom" style="border: none;">                    
                     <button class="button button-block button-positive" ng-click="login(user)">
                         <i class="icon-left ion-log-in icon-btn-custom"></i>&nbsp;Sign in
                     </button>                    
-                </div>
-                <div class="col-10"></div>
+                </div>                
             </div>
             
           </div>
