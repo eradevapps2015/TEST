@@ -66,8 +66,12 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('SignInCtrl', function($scope, $state, $http, $rootScope, $ionicLoading, $timeout) {
-    checkConnection();
-    
+//    if(checkConnectionStatus()) {
+//        alert("");
+//    } else {
+//        alert("Connected...");
+//    }
+//    
     //$rootScope.getServerIp='http://10.11.201.19/';
     $rootScope.getServerIp='http://202.40.190.14:8084/'
     
@@ -78,7 +82,7 @@ angular.module('starter', ['ionic'])
 //	}
     
 	$scope.login = function (user) {
-       	checkConnection();		
+       			
 		if(user.uname==""){
 		alert("Please Enter Your User ID");
 		}else if(user.pass==""){
@@ -135,8 +139,7 @@ angular.module('starter', ['ionic'])
 
 .controller('WelcomeCtrl', function($scope, $state, $http, $rootScope,$ionicLoading,$filter,$ionicPopup) {
 
-	 $scope.btnLogOut = function() {
-        checkConnection();
+	 $scope.btnLogOut = function() {		
 		var confirmPopup = $ionicPopup.confirm({
 			 title: 'Log out now?',
 			// template: 'Log out now?'
@@ -179,7 +182,6 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('AccBalanceCtrl', function($scope, $state, $http, $rootScope, $ionicLoading) {
-    checkConnection();
 	$ionicLoading.show();
 
         cusCode = $rootScope.cusCode;
@@ -217,7 +219,6 @@ angular.module('starter', ['ionic'])
 
 
 .controller('AccStatementCtrl', function($scope, $state, $http, $rootScope,$ionicLoading) {
-    checkConnection();
 		$ionicLoading.show();
 		//cusCode = $rootScope.cusCode;
 		mailID = $rootScope.mailID;
@@ -283,7 +284,7 @@ angular.module('starter', ['ionic'])
    
                 //$scope.myData = {};
                 $scope.doClick = function() {
-					 checkConnection();	
+						
 					 //$scope.serach.toDate = "2015.12.12"
 					 var sourceAc = document.getElementById("mySelect");
 					var accountno =  sourceAc.options[sourceAc.selectedIndex].value;
@@ -371,7 +372,6 @@ angular.module('starter', ['ionic'])
 
 //***************Fund Transfer***************************************************************************************************************************************************************////////////
 .controller('FundTransterCtrl', function($scope, $state, $http, $rootScope,$ionicLoading,$filter) {
-    checkConnection();
 		//alert("Fund Transfer");
 		$ionicLoading.show();
 		//cusCode = $rootScope.cusCode;
@@ -615,7 +615,6 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('fundTransterRequestCtrl', function($scope, $state, $http, $rootScope,$ionicLoading,$filter) {
-    checkConnection();
 //alert("Fund Transfer");
 		$ionicLoading.show();
 		//cusCode = $rootScope.cusCode;
@@ -678,7 +677,6 @@ angular.module('starter', ['ionic'])
 		//************* Begin For Populate field Selecting by Source Account//****************
 		
 		document.getElementById("sourcecAcChangeListener").onchange = function() {
-            checkConnection();
 		   //setActiveStyleSheet(this.value);
 		  // return false
 		   $ionicLoading.show();
@@ -767,7 +765,6 @@ angular.module('starter', ['ionic'])
 		
 		// ****************Begin For Populate field Selecting by Destination Account***************
 				document.getElementById("destinationAcChangeListener").onchange = function() {
-                    checkConnection();
 				  var destrinationAccountNo=this.value;
 					//alert(destinationAccount);
 					$ionicLoading.show();
@@ -803,7 +800,6 @@ angular.module('starter', ['ionic'])
 			
 			// ****************Begin Submit Execution***************
 				 $scope.doSubmit = function() {
-                     checkConnection();
 				 //alert("dockil");
 				
 					var requestDate=document.getElementById("txtRequestDate").value;
@@ -873,7 +869,6 @@ angular.module('starter', ['ionic'])
 
 
 .controller('talkTimeRechargetCtrl', function($scope, $state, $http, $rootScope,$ionicLoading,$filter) {
-    checkConnection();
 	//alert($filter("date")(Date.now(), 'yyyy-MM-dd'));
 	
 			//alert("Fund Transfer");
@@ -1084,7 +1079,6 @@ angular.module('starter', ['ionic'])
 		   
 					// ****************Begin TalkTime Submit Execution***************
 				 $scope.doSubmit = function() {
-                     checkConnection();
 				  //$ionicLoading.show();
 						//var requestDate=document.getElementById("txtRequestDate").value;
 					var sourcecAcChangeListener = document.getElementById("sourcecAcChangeListener");					
@@ -1162,7 +1156,7 @@ angular.module('starter', ['ionic'])
 
 //**************** Stop Cheque Leaf ***************************************************************************************
 .controller('stopChequeLeafCtrl', function($scope, $state, $http, $rootScope,$ionicLoading,$filter) {
-checkConnection();
+
 	//alert($filter("date")(Date.now(), 'yyyy-MM-dd'));
 	
 			//alert("Fund Transfer");
